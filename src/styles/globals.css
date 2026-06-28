@@ -1,0 +1,28 @@
+/*
+ * Frostboard global styles.
+ *
+ * chiselui's stylesheet (imported before this file in the root layout) already
+ * ships a CSS reset and the themable design tokens — including the
+ * `--color-surface` background and `--color-neutral-900` text colour that flip
+ * with `data-theme`. This file only layers the Frostboard-specific variables
+ * and a couple of app-level conveniences on top, without fighting the design
+ * system.
+ */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+:root {
+  /* App-shell dimensions consumed by the dashboard layout in later phases. */
+  --fb-sidebar-width: 240px;
+  --fb-sidebar-collapsed-width: 64px;
+  --fb-header-height: 60px;
+  --fb-content-max-width: 1280px;
+}
+
+body {
+  min-height: 100vh;
+}
