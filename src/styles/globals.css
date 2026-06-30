@@ -667,3 +667,138 @@ body {
     max-width: none;
   }
 }
+
+/* --------------------------------------------------------------------------
+ * Billing (Phase 4)
+ * ------------------------------------------------------------------------ */
+
+.fb-summary-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-4);
+}
+
+.fb-stat-card__label {
+  display: block;
+  font-size: var(--font-size-sm);
+  color: var(--color-neutral-500);
+  font-weight: var(--font-weight-medium);
+}
+
+.fb-stat-card__value {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: 1.5rem;
+  font-weight: var(--font-weight-bold);
+  color: var(--color-neutral-900);
+  line-height: 1.2;
+  margin-top: var(--space-2);
+}
+
+.fb-stat-card__meta {
+  display: block;
+  font-size: var(--font-size-sm);
+  color: var(--color-neutral-500);
+  margin-top: var(--space-2);
+}
+
+/* Payment method card */
+.fb-payment-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+  flex-wrap: wrap;
+}
+
+.fb-payment-card__info {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.fb-card-brand {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 48px;
+  height: 32px;
+  padding: 0 var(--space-2);
+  border-radius: var(--radius-sm);
+  background-color: var(--color-neutral-900);
+  color: #fff;
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-bold);
+  letter-spacing: 0.04em;
+  flex-shrink: 0;
+}
+
+/* Usage meters */
+.fb-usage-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+}
+
+.fb-usage-row__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--space-2);
+}
+
+.fb-usage-row__label {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-neutral-900);
+}
+
+.fb-usage-row__value {
+  font-size: var(--font-size-sm);
+  color: var(--color-neutral-500);
+  font-variant-numeric: tabular-nums;
+}
+
+/* Setting row (label + control), shared by billing and settings */
+.fb-setting-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+  padding: var(--space-4) 0;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.fb-setting-row:first-child {
+  padding-top: 0;
+}
+
+.fb-setting-row:last-child {
+  padding-bottom: 0;
+  border-bottom: none;
+}
+
+.fb-setting-row__text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.fb-setting-row__title {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-neutral-900);
+}
+
+.fb-setting-row__desc {
+  font-size: var(--font-size-sm);
+  color: var(--color-neutral-500);
+}
+
+@media (max-width: 1024px) {
+  .fb-summary-grid {
+    grid-template-columns: 1fr;
+  }
+}
