@@ -802,3 +802,38 @@ body {
     grid-template-columns: 1fr;
   }
 }
+
+/* --------------------------------------------------------------------------
+ * Settings (Phase 4)
+ * ------------------------------------------------------------------------ */
+
+.fb-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  max-width: 520px;
+}
+
+.fb-form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-4);
+}
+
+.fb-drawer-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.fb-check-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+@media (max-width: 640px) {
+  .fb-form-row {
+    grid-template-columns: 1fr;
+  }
+}
