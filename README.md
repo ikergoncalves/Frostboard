@@ -1,36 +1,94 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Frostboard
 
-## Getting Started
+A modern, production-feeling admin dashboard for a fictional SaaS company —
+built as a reusable template and portfolio piece.
 
-First, run the development server:
+[Live demo](#) <!-- replace with the real Vercel URL after deploy -->
+
+## Tech stack
+
+- **Next.js 14** (App Router, TypeScript strict)
+- **[chiselui](https://www.npmjs.com/package/chiselui)** — the only UI library,
+  a CSS-variable-driven component system with native dark mode
+- **Recharts** for data visualization
+- **Deterministic mock data** — no backend, no database; every number is
+  generated from a seeded PRNG so the dashboard looks the same on every load
+- Deployed on **Vercel**
+
+## Features
+
+- 6 fully built pages: Overview, Analytics, Customers, Billing, Reports, Settings
+- Native dark mode via chiselui's `ThemeToggle`, with a pre-hydration script to
+  avoid a flash on reload
+- Collapsible, keyboard-accessible sidebar with a working mobile drawer
+- Live in-memory filtering (search, plan, status, date range) on the Customers page
+- Sortable, paginated data tables built on chiselui's `DataTable`
+- A self-contained, SSR-safe toast notification system (see
+  [Design decisions](#design-decisions))
+- Empty states, loading states, and a custom 404 page
+- Fully responsive down to mobile
+
+## Getting started
 
 ```bash
+git clone https://github.com/ikergoncalves/Frostboard.git
+cd Frostboard
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Project structure
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```
+src/
+  app/
+    (dashboard)/          route group — sidebar + header shell
+      analytics/           page.tsx + AnalyticsView.tsx
+      billing/             page.tsx + BillingView.tsx
+      customers/           page.tsx + CustomersView.tsx
+      dashboard/           Overview
+      reports/             page.tsx + ReportsView.tsx
+      settings/            page.tsx + SettingsView.tsx
+      layout.tsx
+      loading.tsx
+    layout.tsx             root layout, theme init script
+    not-found.tsx          custom 404
+    page.tsx               redirects / -> /dashboard
+  components/
+    dashboard/             KpiCard, RevenueChart, RecentActivity,
+                           PlanDistribution, TopCustomersTable, use-chart-colors
+    layout/                Sidebar, Header, NavItem, mobile-nav-context,
+                           toast-provider
+  hooks/
+    useToast.ts            re-export of the toast hook (stable import path)
+  lib/
+    mock-data.ts           deterministic NovaSaaS dataset
+    format.ts              currency/date/number formatters
+  styles/
+    globals.css
+```
 
-## Learn More
+## Design decisions
 
-To learn more about Next.js, take a look at the following resources:
+**Why chiselui as the only UI library?** The goal was to prove a dashboard this
+complete doesn't need Tailwind or a component framework like MUI — a
+well-designed, CSS-variable-driven design system is enough, and it keeps the
+bundle lean.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+**Toast system.** chiselui's own `ToastProvider` renders its notification portal
+unconditionally into `document.body`, which crashes Next.js's static
+prerendering (`document is not defined`). Frostboard ships a small SSR-safe
+replacement (`src/components/layout/toast-provider.tsx`) that keeps the same
+API (`useToast().toast({ message, variant })`) and visually matches chiselui's
+own toast styling, but only mounts the portal after hydration.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+**Deterministic mock data.** Every number on the dashboard is derived from a
+seeded pseudo-random generator and a fixed reference date, so the dataset is
+internally consistent (KPIs always tie out to the underlying records) and
+identical between server and client renders — no hydration mismatches.
 
-## Deploy on Vercel
+## License
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+MIT
