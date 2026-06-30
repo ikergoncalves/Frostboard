@@ -17,6 +17,8 @@ import {
   type TabItem,
 } from "chiselui";
 
+import { useToast } from "@/hooks/useToast";
+
 type Role = "Admin" | "Member" | "Viewer";
 
 interface Member {
@@ -93,6 +95,8 @@ const sessions: readonly Session[] = [
 ];
 
 export function SettingsView() {
+  const { toast } = useToast();
+
   const [maxSeats, setMaxSeats] = useState(50);
 
   const [isDrawerOpen, setDrawerOpen] = useState(false);
@@ -121,6 +125,16 @@ export function SettingsView() {
     setInviteRole("Member");
   };
 
+  const handleSaveChanges = () => {
+    toast({ message: "Settings saved.", variant: "success" });
+  };
+
+  const handleSendInvite = () => {
+    const recipient = inviteEmail.trim() || "the new member";
+    closeDrawer();
+    toast({ message: `Invitation sent to ${recipient}.`, variant: "success" });
+  };
+
   const generalTab = (
     <div className="fb-card">
       <div className="fb-form">
@@ -143,7 +157,7 @@ export function SettingsView() {
           step={1}
         />
         <div className="fb-form-actions">
-          <Button>Save changes</Button>
+          <Button onClick={handleSaveChanges}>Save changes</Button>
         </div>
       </div>
     </div>
@@ -279,7 +293,7 @@ export function SettingsView() {
             <Button variant="secondary" onClick={closeDrawer}>
               Cancel
             </Button>
-            <Button onClick={closeDrawer}>Send invite</Button>
+            <Button onClick={handleSendInvite}>Send invite</Button>
           </div>
         }
       >

@@ -425,6 +425,13 @@ body {
   flex-direction: column;
   gap: var(--space-2);
   min-height: 116px;
+  cursor: default;
+  transition: box-shadow 0.15s ease;
+}
+
+.fb-kpi-card:hover {
+  box-shadow: 0 2px 8px
+    color-mix(in srgb, var(--color-neutral-900) 8%, transparent);
 }
 
 .fb-kpi-card__label {
@@ -836,4 +843,94 @@ body {
   .fb-form-row {
     grid-template-columns: 1fr;
   }
+}
+
+/* --------------------------------------------------------------------------
+ * UX polish (Phase 5): loading, empty state, 404
+ * ------------------------------------------------------------------------ */
+
+.fb-loading-page {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 400px;
+  width: 100%;
+}
+
+.fb-empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-12) var(--space-8);
+  gap: var(--space-4);
+  text-align: center;
+}
+
+.fb-empty-state__icon {
+  width: 48px;
+  height: 48px;
+  color: var(--color-neutral-300);
+}
+
+.fb-empty-state__title {
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-neutral-900);
+  margin: 0;
+}
+
+.fb-empty-state__desc {
+  font-size: var(--font-size-md);
+  color: var(--color-neutral-500);
+  margin: 0;
+}
+
+.fb-not-found {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  gap: var(--space-4);
+  text-align: center;
+  padding: var(--space-8);
+}
+
+.fb-not-found__code {
+  font-size: 6rem;
+  font-weight: var(--font-weight-bold);
+  color: var(--color-neutral-200);
+  line-height: 1;
+}
+
+.fb-not-found__title {
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-neutral-900);
+  margin: 0;
+}
+
+.fb-not-found__desc {
+  font-size: var(--font-size-md);
+  color: var(--color-neutral-500);
+  margin: 0;
+  max-width: 360px;
+}
+
+.fb-not-found__link {
+  display: inline-flex;
+  align-items: center;
+  padding: var(--space-2) var(--space-5);
+  background-color: var(--color-primary);
+  color: #fff;
+  border-radius: var(--radius-md);
+  text-decoration: none;
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  transition: opacity 0.15s ease;
+}
+
+.fb-not-found__link:hover {
+  opacity: 0.88;
 }

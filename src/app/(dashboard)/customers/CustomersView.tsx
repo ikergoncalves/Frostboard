@@ -20,6 +20,7 @@ import {
   type Plan,
 } from "@/lib/mock-data";
 import { formatCurrency, formatDate } from "@/lib/format";
+import { useToast } from "@/hooks/useToast";
 
 /**
  * Row shape for the table. A `type` alias (not the `Customer` interface) is
@@ -136,6 +137,23 @@ const plusIcon = (
   </svg>
 );
 
+const emptyIcon = (
+  <svg
+    width="48"
+    height="48"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="1.5"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    aria-hidden="true"
+  >
+    <circle cx="11" cy="11" r="7" />
+    <line x1="16" y1="16" x2="21" y2="21" />
+  </svg>
+);
+
 /** End-of-day clone so a chosen end date includes everything on that day. */
 function endOfDay(date: Date): Date {
   const clone = new Date(date);
@@ -156,6 +174,8 @@ const allRows: CustomerRow[] = customers.map((customer) => ({
 }));
 
 export function CustomersView() {
+  const { toast } = useToast();
+
   const [search, setSearch] = useState("");
   const [plan, setPlan] = useState("");
   const [status, setStatus] = useState("");
@@ -195,6 +215,18 @@ export function CustomersView() {
     setNewName("");
     setNewEmail("");
     setNewPlan("starter");
+  };
+
+  const handleAddCustomer = () => {
+    closeModal();
+    toast({ message: "Customer added successfully.", variant: "success" });
+  };
+
+  const clearFilters = () => {
+    setSearch("");
+    setPlan("");
+    setStatus("");
+    setRange({ start: null, end: null });
   };
 
   return (
@@ -247,14 +279,27 @@ export function CustomersView() {
         </div>
       </div>
 
-      <div className="fb-card">
-        <DataTable<CustomerRow>
-          columns={columns}
-          data={rows}
-          pageSize={8}
-          emptyMessage="No customers match these filters."
-        />
-      </div>
+      {rows.length === 0 ? (
+        <div className="fb-empty-state">
+          <div className="fb-empty-state__icon">{emptyIcon}</div>
+          <h3 className="fb-empty-state__title">No customers found</h3>
+          <p className="fb-empty-state__desc">
+            Try adjusting your filters or search term.
+          </p>
+          <Button variant="secondary" onClick={clearFilters}>
+            Clear filters
+          </Button>
+        </div>
+      ) : (
+        <div className="fb-card">
+          <DataTable<CustomerRow>
+            columns={columns}
+            data={rows}
+            pageSize={8}
+            emptyMessage="No customers match these filters."
+          />
+        </div>
+      )}
 
       <Modal
         isOpen={isModalOpen}
@@ -286,7 +331,7 @@ export function CustomersView() {
             <Button variant="secondary" onClick={closeModal}>
               Cancel
             </Button>
-            <Button onClick={closeModal}>Add customer</Button>
+            <Button onClick={handleAddCustomer}>Add customer</Button>
           </div>
         </div>
       </Modal>

@@ -20,6 +20,7 @@ import { Button, Tabs, type TabItem } from "chiselui";
 import { monthlyRevenue } from "@/lib/mock-data";
 import { formatCompactUsd, formatCurrency, formatNumber } from "@/lib/format";
 import { useChartColors } from "@/components/dashboard/use-chart-colors";
+import { useToast } from "@/hooks/useToast";
 
 const tooltipContentStyle = {
   backgroundColor: "var(--color-surface)",
@@ -52,13 +53,26 @@ const downloadIcon = (
 
 export function ReportsView() {
   const colors = useChartColors();
+  const { toast } = useToast();
   const data = [...monthlyRevenue];
+
+  const handleExport = () => {
+    toast({
+      message: "Export started. Your file will download shortly.",
+      variant: "info",
+    });
+  };
 
   const chartCard = (title: string, body: ReactNode): ReactNode => (
     <div className="fb-card">
       <div className="fb-card__header">
         <h3 className="fb-card__title">{title}</h3>
-        <Button variant="secondary" size="sm" leftIcon={downloadIcon}>
+        <Button
+          variant="secondary"
+          size="sm"
+          leftIcon={downloadIcon}
+          onClick={handleExport}
+        >
           Export CSV
         </Button>
       </div>
