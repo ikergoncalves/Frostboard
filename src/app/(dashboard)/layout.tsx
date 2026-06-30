@@ -1,7 +1,7 @@
 import { Sidebar } from "@/components/layout/Sidebar";
 import { Header } from "@/components/layout/Header";
 import { MobileNavProvider } from "@/components/layout/mobile-nav-context";
-import { AppToastProvider } from "@/components/layout/toast-provider";
+import { ToastProvider } from "@/components/layout/toast-boundary";
 
 export default function DashboardLayout({
   children,
@@ -9,7 +9,7 @@ export default function DashboardLayout({
   children: React.ReactNode;
 }) {
   return (
-    <AppToastProvider>
+    <ToastProvider>
       <MobileNavProvider>
         <div className="fb-shell">
           <Sidebar />
@@ -19,6 +19,6 @@ export default function DashboardLayout({
           </div>
         </div>
       </MobileNavProvider>
-    </AppToastProvider>
+    </ToastProvider>
   );
 }
