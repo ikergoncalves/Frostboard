@@ -588,3 +588,82 @@ body {
     grid-template-columns: 1fr;
   }
 }
+
+/* --------------------------------------------------------------------------
+ * Internal pages — shared scaffolding (Phase 4)
+ * ------------------------------------------------------------------------ */
+
+/* Generic vertical stack for stacked page sections / tab panels. */
+.fb-stack {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+}
+
+.fb-page-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+  flex-wrap: wrap;
+  margin-bottom: var(--space-6);
+}
+
+.fb-page-title {
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-neutral-900);
+  margin: 0;
+}
+
+.fb-page-subtitle {
+  font-size: var(--font-size-sm);
+  color: var(--color-neutral-500);
+  margin: var(--space-1) 0 0;
+}
+
+/* Filter bar */
+.fb-filters {
+  display: flex;
+  align-items: flex-end;
+  gap: var(--space-3);
+  flex-wrap: wrap;
+  margin-bottom: var(--space-5);
+}
+
+.fb-filter-item {
+  min-width: 180px;
+}
+
+.fb-filter-item--search {
+  min-width: 240px;
+  flex: 1;
+  max-width: 320px;
+}
+
+.fb-filter-item--range {
+  min-width: 280px;
+}
+
+/* Form actions row (modals, settings) */
+.fb-form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--space-3);
+  margin-top: var(--space-2);
+}
+
+.fb-modal-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+@media (max-width: 640px) {
+  .fb-filter-item,
+  .fb-filter-item--search,
+  .fb-filter-item--range {
+    min-width: 100%;
+    max-width: none;
+  }
+}
