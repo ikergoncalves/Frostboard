@@ -3,7 +3,7 @@
 A modern, production-feeling admin dashboard for a fictional SaaS company —
 built as a reusable template and portfolio piece.
 
-[Live demo](#) <!-- replace with the real Vercel URL after deploy -->
+[Live demo](https://frostboard.vercel.app/)
 
 ## Tech stack
 
