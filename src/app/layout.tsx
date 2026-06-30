@@ -3,8 +3,24 @@ import "chiselui/styles.css";
 import "@/styles/globals.css";
 
 export const metadata: Metadata = {
-  title: "Frostboard",
-  description: "Modern SaaS admin dashboard",
+  title: {
+    default: "Frostboard — SaaS admin dashboard",
+    template: "%s",
+  },
+  description:
+    "A modern admin dashboard template for SaaS products, built with Next.js 14 and chiselui.",
+  openGraph: {
+    title: "Frostboard — SaaS admin dashboard",
+    description:
+      "A modern admin dashboard template for SaaS products, built with Next.js 14 and chiselui.",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Frostboard — SaaS admin dashboard",
+    description:
+      "A modern admin dashboard template for SaaS products, built with Next.js 14 and chiselui.",
+  },
 };
 
 /**
