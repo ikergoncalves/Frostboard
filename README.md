@@ -91,4 +91,4 @@ identical between server and client renders — no hydration mismatches.
 
 ## License
 
-MIT
+[MIT](LICENSE)
